@@ -1,0 +1,45 @@
+ion-content {
+  --background: linear-gradient(to bottom, #3498db, #2980b9);
+}
+
+ion-card-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+ion-item {
+  margin-bottom: 20px;
+}
+
+ion-label {
+  font-weight: bold;
+  color: #333;
+}
+
+ion-input {
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+}
+
+ion-button {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+ion-button:hover {
+  background-color: #0056b3;
+}

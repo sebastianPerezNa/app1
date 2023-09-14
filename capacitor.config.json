@@ -1,0 +1,7 @@
+{
+  "appId": "tu_id_de_aplicacion",
+  "appName": "Nombre de tu aplicación",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
+
