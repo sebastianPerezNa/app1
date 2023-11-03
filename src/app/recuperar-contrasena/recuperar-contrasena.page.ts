@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -8,25 +8,44 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./recuperar-contrasena.page.scss'],
 })
 export class RecuperarContrasenaPage {
-  correo: string = '';
+  usuario: string = '';
+  contrasenaRegistrada: string = ''; // Variable para almacenar la contraseña recuperada
+  mostrarContrasenaAlert: boolean = false; // Controlar la visibilidad del mensaje emergente
 
   constructor(
-    private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private storage: Storage
   ) {}
 
-  async recuperarContrasena() {
-    // Aquí puedes agregar la lógica para enviar la solicitud de recuperación de contraseña,
-    // por ejemplo, enviar una solicitud al servidor.
+  recuperarContrasena() {
+    if (this.usuario) {
+      // Obtén la contraseña almacenada en el registro
+      this.storage.get('datosRegistro').then((data) => {
+        const datosRegistro = JSON.parse(data);
+        if (datosRegistro && datosRegistro.usuario === this.usuario) {
+          this.contrasenaRegistrada = datosRegistro.contrasena;
+          this.mostrarContrasenaAlert = true;
+        } else {
+          this.presentAlert('Usuario no encontrado. Verifica el usuario ingresado.');
+        }
+      });
+    } else {
+      this.presentAlert('Por favor, ingresa el nombre de usuario.');
+    }
+  }
 
-    // Después de enviar la solicitud con éxito, muestra un mensaje emergente.
+  mostrarContrasena() {
+    // Muestra el mensaje emergente con la contraseña
+    this.mostrarContrasenaAlert = true;
+  }
+
+  async presentAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Correo Enviado',
-      message: 'Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.',
-      buttons: ['OK'],
+      header: 'Recuperación de Contraseña',
+      message: message,
+      buttons: ['Cerrar'],
     });
 
     await alert.present();
   }
 }
-

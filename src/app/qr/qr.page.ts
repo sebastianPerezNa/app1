@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { NavController } from '@ionic/angular';
-import * as QRCode from 'qrcode-generator';
 
 const { BarcodeScanner } = Plugins;
 
@@ -10,47 +9,28 @@ const { BarcodeScanner } = Plugins;
   templateUrl: './qr.page.html',
   styleUrls: ['./qr.page.scss'],
 })
-export class QrPage implements OnInit {
-  qrData: string = '';
-  qrCodeImage: string = '';
-  qrDataGenerated: boolean = false;
+export class QrPage {
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController) { }
 
-  ngOnInit() {}
+  async escanearQR() {
+    const result = await BarcodeScanner['startScan']();
 
-  generateQRCode() {
-    const profesor = 'Juan Perez';
-    const sala = '805';
-    const fechaHora = new Date().toLocaleString();
+    if (result.hasContent) {
+      // Obtener la información del escaneo
+      const scannedValue = result.content;
 
-    this.qrData = `Profesor: ${profesor}, Sala: ${sala}, Fecha y Hora: ${fechaHora}`;
-
-    const typeNumber = 4;
-    const errorCorrectionLevel = 'L';
-
-    const qr = QRCode(typeNumber, errorCorrectionLevel);
-    qr.addData(this.qrData);
-    qr.make();
-
-    this.qrCodeImage = qr.createDataURL(10, 0);
-    this.qrDataGenerated = true;
-  }
-
-  async scanQRCode() {
-    try {
-      const barcodeData = await BarcodeScanner['scan']();
-
-      if (!barcodeData.cancelled) {
-        this.qrData = barcodeData.text;
-        this.qrDataGenerated = true;
-      }
-    } catch (error) {
-      console.error(error);
+      // Redirigir al usuario a la página "clase-registrada" con la información
+      this.navCtrl.navigateForward('/clase-registrada', {
+        queryParams: {
+          hora: 'Hora del escaneo',
+          nombreProfesor: 'Iturra',
+          sala: 'Sala'
+        }
+      });
+    } else {
+      // Manejar el caso en el que no se escaneó un código QR válido
+      // Puedes mostrar una alerta aquí si es necesario
     }
-  }
-
-  volverALogin() {
-    this.navCtrl.navigateBack('/login');
   }
 }

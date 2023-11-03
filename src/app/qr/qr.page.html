@@ -1,22 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Escanear QR
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      Generar Código QR
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button (click)="generateQRCode()">Generar Código QR</ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngIf="qrDataGenerated">
-    <ion-card-header>
-      Código QR Generado
-    </ion-card-header>
-    <ion-card-content>
-      <img [src]="qrCodeImage" alt="Código QR">
-      <p>{{ qrData }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button (click)="volverALogin()" expand="full" color="danger">Volver al inicio</ion-button>
+  <ion-button expand="full" (click)="escanearQR()">Generar Escaneo</ion-button>
 </ion-content>

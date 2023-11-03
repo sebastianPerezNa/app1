@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clase Registrada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información del alumno</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Nombre Profesor:</ion-label>
+        <ion-text>Francisco Iturra</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sala:</ion-label>
+        <ion-text>L9</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora:</ion-label>
+        <ion-text>{{ horaActual }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Usuario:</ion-label>
+        <ion-text>{{ usuarioRegistrado }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Latitud:</ion-label>
+        <ion-text>{{ latitud }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Longitud:</ion-label>
+        <ion-text>{{ longitud }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Foto de alumno:</ion-label>
+        <ion-img id="imagen-alumno" style="max-width: 200px; max-height: 200px;"></ion-img>
+      </ion-item>
+
+      <ion-button expand="full" (click)="seleccionarFotoAlumno()">
+        Seleccionar foto de alumno
+      </ion-button>
+      <ion-button expand="full" (click)="tomarSelfie()">
+        Tomar selfie
+      </ion-button>
+      <ion-item>
+        <ion-label>Selfie:</ion-label>
+        <ion-img id="imagen-selfie" style="max-width: 200px; max-height: 200px;"></ion-img>
+      </ion-item>
+
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

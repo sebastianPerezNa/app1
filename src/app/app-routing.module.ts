@@ -27,6 +27,18 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+  {
+    path: 'clase-registrada',
+    loadChildren: () => import('./clase-registrada/clase-registrada.module').then( m => m.ClaseRegistradaPageModule)
+  },
+  {
+    path: 'comunas-modal',
+    loadChildren: () => import('./comunas-modal/comunas-modal.module').then( m => m.ComunasModalPageModule)
+  },
+  { path: 'error404', loadChildren: () => import('./error404/error404.module').then(m => m.Error404PageModule) },
+
+  // Ruta de redirección para páginas no encontradas
+  { path: '**', redirectTo: 'error404' },
 
 
 
