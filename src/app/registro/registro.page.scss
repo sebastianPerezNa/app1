@@ -1,34 +1,21 @@
-/* Estilos para el fondo del contenido */
-ion-content {
-  --background: linear-gradient(to bottom, #3498db, #2980b9);
-  background: var(--background);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  text-align: center;
-  padding: 20px;
-  color: #fff;
-}
-
 /* Estilos para el título del formulario */
 ion-card-title {
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 24px; /* Reducido el tamaño de fuente */
   margin-bottom: 20px;
 }
 
 /* Estilos para las etiquetas de los campos de entrada */
 ion-label {
   font-weight: bold;
-  color: #333;
+  color: #007bff; /* Cambiado a un color más cercano al ejemplo */
 }
 
 /* Estilos para los campos de entrada */
 ion-input {
-  border: 2px solid #007bff;
-  border-radius: 5px;
+  border: 1px solid #007bff; /* Cambiado el grosor del borde */
+  border-radius: 4px; /* Ajustado el radio del borde */
   padding: 10px;
-  font-size: 18px;
+  font-size: 16px; /* Reducido el tamaño de fuente */
   width: 100%;
 }
 
@@ -38,9 +25,9 @@ ion-button {
   color: #fff;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
-  padding: 15px;
-  font-size: 20px;
+  border-radius: 4px; /* Ajustado el radio del borde */
+  padding: 10px;
+  font-size: 18px; /* Reducido el tamaño de fuente */
   width: 100%;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -57,4 +44,14 @@ ion-button:hover {
   padding: 10px;
   border: 1px solid #ccc;
   /* Agrega cualquier otro estilo deseado aquí */
+}
+ion-content {
+  background-image: url('/images/bg4_2.png');
+  background-color: #cfcbbf;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  text-align: center;
+  padding: 20px;
+  color: #333; /* Cambiado a un color de texto más oscuro */
 }

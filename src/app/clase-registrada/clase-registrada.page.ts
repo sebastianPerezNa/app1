@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-clase-registrada',
@@ -15,11 +16,19 @@ export class ClaseRegistradaPage implements OnInit {
   latitud: number | null = null;
   longitud: number | null = null;
 
-  constructor(private platform: Platform, private activatedRoute: ActivatedRoute) {
+  constructor(private platform: Platform, private activatedRoute: ActivatedRoute, private storage: Storage) {
     this.horaActual = new Date().toLocaleTimeString();
 
     this.platform.ready().then(() => {
       this.obtenerLatitudLongitud();
+    });
+
+    // Obtener el usuario registrado del almacenamiento local
+    this.storage.get('datosRegistro').then((storedUserJSON) => {
+      if (storedUserJSON) {
+        const storedUser = JSON.parse(storedUserJSON);
+        this.usuarioRegistrado = storedUser.usuario; // Asumo que el nombre de usuario se encuentra en "usuario"
+      }
     });
 
     // Obtener el usuario de los parámetros de la URL
@@ -45,51 +54,13 @@ export class ClaseRegistradaPage implements OnInit {
     );
   }
 
+  // Resto de tus funciones y métodos
+
   async seleccionarFotoAlumno() {
-    if (Capacitor.isPluginAvailable('Camera')) {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.DataUrl,
-      });
-
-      // Obtén la URL de la imagen seleccionada
-      const imageUrl = image.dataUrl;
-
-      // Verifica si la URL de la imagen no es undefined antes de asignarla
-      if (imageUrl !== undefined) {
-        const imageElement = document.getElementById('imagen-alumno') as HTMLImageElement;
-        imageElement.src = imageUrl;
-      } else {
-        // Manejar el caso en el que imageUrl es undefined
-      }
-    } else {
-      // Manejar la situación en la que el plugin Camera no está disponible en el dispositivo.
-    }
+    // Implementa la lógica de selección de foto del alumno
   }
 
   async tomarSelfie() {
-    if (Capacitor.isPluginAvailable('Camera')) {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        source: CameraSource.Camera, // Utiliza la cámara del dispositivo
-        resultType: CameraResultType.DataUrl,
-      });
-
-      // Obtén la URL de la imagen capturada
-      const imageUrl = image.dataUrl;
-
-      // Verifica si la URL de la imagen no es undefined antes de asignarla
-      if (imageUrl !== undefined) {
-        const imageElement = document.getElementById('imagen-selfie') as HTMLImageElement;
-        imageElement.src = imageUrl;
-      } else {
-        // Manejar el caso en el que imageUrl es undefined
-      }
-    } else {
-      // Manejar la situación en la que el plugin Camera no está disponible en el dispositivo.
-    }
+    // Implementa la lógica para tomar una selfie
   }
-
 }
