@@ -50,29 +50,18 @@ export class RegistroPage {
   }
 
   getComunas() {
-    this.fetchComunas(1); // Comenzamos con la primera página
-  }
-
-  fetchComunas(page: number) {
-    this.http
-      .get(`https://dev.matiivilla.cl/duoc/location/comuna?page=${page}&perPage=10`)
-      .subscribe(
-        (data: any) => {
-          if (data && data.data && data.data.length > 0) {
-            // Agregamos las comunas de la página actual al arreglo de comunas
-            this.comunas.push(...data.data);
-
-            // Si hay más páginas, llamamos nuevamente para obtener la siguiente página
-            if (page < data.totalPages) {
-              this.fetchComunas(page + 1);
-            }
-          }
-        },
-        (error) => {
-          console.error('Error al obtener las comunas:', error);
+    this.http.get('https://dev.matiivilla.cl/duoc/location/comuna/7').subscribe(
+      (data: any) => {
+        if (data && data.data && data.data.length > 0) {
+          this.comunas = data.data;
         }
-      );
+      },
+      (error) => {
+        console.error('Error al obtener las comunas:', error);
+      }
+    );
   }
+
 
   registro() {
     if (this.usuario && this.contrasena) {
